@@ -723,3 +723,36 @@ button:focus-visible {
 .noteworthy-button:focus-visible{outline:2px solid #b6522c;outline-offset:3px;}
 .noteworthy-button:disabled{opacity:.6;cursor:wait;}
 @media(pointer:coarse){.noteworthy-button{width:44px;height:44px;}}
+
+/* Approved judging card design. Scores and submission rules are unchanged. */
+.phone{border:1px solid #e6e2dc;box-shadow:0 8px 28px #3c2a1814;border-radius:26px;}
+#wine-screen{background:#fffcf8;padding-bottom:100px;}
+.judging-brand{display:flex;align-items:center;justify-content:space-between;padding:17px 24px;background:white;border-bottom:1px solid #e6e2dc;}
+.judging-brand span:first-child{font:27px Georgia,serif;letter-spacing:-1px;color:#f4540c;}.judging-brand span:last-child{font-size:10px;letter-spacing:1.6px;color:#79736b;}
+#wine-screen .wine-header{position:relative;top:auto;grid-template-columns:44px minmax(0,1fr) 44px;grid-template-rows:auto auto;gap:8px;min-height:0;padding:14px 18px 24px;border:0;background:transparent;backdrop-filter:none;}
+.wine-context{grid-column:2;grid-row:1;text-align:center;align-self:center;font-size:11px;letter-spacing:1px;font-weight:600;text-transform:uppercase;}
+#wine-screen #back-flight{grid-column:1;grid-row:1;border:0;background:transparent;min-height:44px;width:40px;border-radius:8px;font-size:28px;color:#302c27;}
+#wine-screen .noteworthy-button{grid-column:3;grid-row:1;align-self:center;}
+#wine-screen .wine-heading{grid-column:1/-1;grid-row:2;text-align:center;padding-top:12px;}
+#wine-screen .wine-number{margin:0 auto 10px;width:30px;height:30px;font-size:13px;font-weight:600;background:#f4540c;}
+#wine-screen .wine-heading h2{font-size:26px;letter-spacing:-.7px;line-height:1.2;margin:0 0 12px;}
+#wine-status{display:inline-block;padding:7px 13px;border-radius:20px;background:#fff0e6;color:#bc410c;font-size:10px;letter-spacing:.8px;font-weight:600;text-transform:uppercase;}
+.attribute-progress{display:flex;align-items:center;gap:14px;margin:0 22px 22px;}.attribute-track{display:flex;gap:4px;flex:1;}.attribute-track span{height:6px;border-radius:8px;background:#ebe8e4;flex:1;}.attribute-track span.is-scored{background:#f4540c;}#attribute-progress-copy{font-size:12px;color:#79736b;white-space:nowrap;font-variant-numeric:tabular-nums;}
+#wine-screen .criteria-list{display:grid;gap:10px;padding:0 18px;}
+#wine-screen .criterion{border:1px solid #e6e2dc;border-radius:13px;background:white;overflow:hidden;}
+#wine-screen .criterion-summary{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:16px;background:transparent;}
+#wine-screen .criterion-summary .title{font-size:16px;text-transform:none;font-weight:600;color:#25231f;}
+#wine-screen .criterion-summary .subtitle{font-size:11px;color:#79736b;margin-top:4px;}
+#wine-screen .criterion.open .criterion-summary{background:#fff0e6;border-left:0;box-shadow:inset 3px 0 0 #f4540c;}
+.criterion-right{display:flex;align-items:center;gap:12px;}#wine-screen .criterion-score{height:auto;min-width:0;padding:0;border:0;background:none;font-size:12px;font-weight:400;color:#79736b;white-space:nowrap;font-variant-numeric:tabular-nums;}
+.criterion-chevron{width:8px;height:8px;border-right:1.5px solid #79736b;border-bottom:1.5px solid #79736b;transform:rotate(45deg);margin:0 3px 4px;}.criterion.open .criterion-chevron{transform:rotate(225deg);margin-top:6px;}
+#wine-screen .criterion-body{padding:16px;}
+#wine-screen .score-buttons{display:grid;grid-template-columns:repeat(var(--score-count),minmax(0,1fr));gap:6px;margin:0 0 18px;}
+#wine-screen .score-btn{min-width:0;width:100%;height:44px;border:0;border-radius:9px;background:#f2f1ef;color:#25231f;font-size:18px;font-weight:600;}
+#wine-screen .score-btn.selected{background:#f4540c;color:white;}
+#wine-screen .guide{border:0;padding:0;margin:0 0 18px;font-size:11px;line-height:1.6;color:#79736b;}#wine-screen .guide strong{font-size:11px;font-weight:600;color:#25231f;margin-bottom:6px;}#wine-screen .guide div{margin:5px 0;}
+#wine-screen .complete-criterion{min-height:44px;border:0;border-radius:9px;background:#f4540c;color:white;font-size:13px;font-weight:600;}
+#wine-screen #draft-status{margin:20px 24px;padding:0;font-size:11px;line-height:1.6;color:#52654c;}
+.wine-total{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:0 24px 18px;color:#79736b;font-size:13px;}.wine-total strong{color:#25231f;font-size:24px;font-weight:600;font-variant-numeric:tabular-nums;}.wine-total small{font-size:13px;font-weight:400;color:#79736b;}
+#wine-screen .sticky-actions{padding:18px;border-top:1px solid #e6e2dc;background:white;gap:10px;}#wine-screen .sticky-actions button{min-height:44px;border-radius:10px;font-size:12px;font-weight:600;}#wine-screen .sticky-actions .primary{background:#f4540c;border-color:#f4540c;color:white;}#wine-screen .sticky-actions .secondary{background:transparent;border-color:#e6e2dc;color:#302c27;}
+@media(max-width:600px){.phone{border:0;border-radius:0;}}
