@@ -712,4 +712,14 @@ button:focus-visible {
 .reset-link:hover {
   opacity: 1;
 }
-.noteworthy-control{padding:12px 24px 0}.noteworthy-control button{min-height:44px;padding:10px 16px;border:1px solid #bd4c28;border-radius:8px;background:white;color:#92391e;font:inherit;cursor:pointer}.noteworthy-control button[aria-pressed="true"]{background:#fff0d4;color:#713200}.noteworthy-control button:disabled{opacity:.6;cursor:wait}.noteworthy-control p{font-size:12px;color:#666;margin:8px 0}
+/* Compact bookmark in the wine header, separate from scoring. */
+.wine-header{grid-template-columns:28px minmax(0,1fr) 44px;gap:12px;}
+.wine-heading{text-align:left;min-width:0;}
+.wine-heading .wine-number{margin:0 0 6px;}
+.noteworthy-button{display:flex;align-items:center;justify-content:center;justify-self:end;width:36px;height:36px;border:1px solid #e5ded4;border-radius:8px;background:transparent;color:#8b7564;cursor:pointer;}
+.noteworthy-button svg{flex:none;}
+.noteworthy-button[aria-pressed="true"]{background:#fff0df;color:#b6522c;border-color:#edc5a4;}
+.noteworthy-button[aria-pressed="true"] svg{fill:currentColor;}
+.noteworthy-button:focus-visible{outline:2px solid #b6522c;outline-offset:3px;}
+.noteworthy-button:disabled{opacity:.6;cursor:wait;}
+@media(pointer:coarse){.noteworthy-button{width:44px;height:44px;}}

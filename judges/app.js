@@ -26,7 +26,9 @@ function renderBookmark(){
   const button=$('#noteworthy');
   const saved=bookmarks.has(currentFlight,currentWine);
   button.setAttribute('aria-pressed',String(saved));
-  button.textContent=saved?'★ Noteworthy':'☆ Mark as noteworthy';
+  const label=saved?'Remove noteworthy bookmark':'Mark wine as noteworthy';
+  button.setAttribute('aria-label',label);
+  button.title=label;
   button.disabled=bookmarks.busy(currentFlight,currentWine);
 }
 $('#noteworthy').onclick=async()=>{
