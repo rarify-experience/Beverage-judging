@@ -713,9 +713,9 @@ button:focus-visible {
   opacity: 1;
 }
 /* Compact bookmark in the wine header, separate from scoring. */
-.wine-header{grid-template-columns:28px minmax(0,1fr) 44px;gap:12px;}
-.wine-heading{text-align:left;min-width:0;}
-.wine-heading .wine-number{margin:0 0 6px;}
+.wine-header{grid-template-columns:44px minmax(0,1fr) 44px;gap:12px;}
+.wine-heading{text-align:center;min-width:0;}
+.wine-heading .wine-number{margin:0 auto 6px;}
 .noteworthy-button{display:flex;align-items:center;justify-content:center;justify-self:end;width:36px;height:36px;border:1px solid #e5ded4;border-radius:8px;background:transparent;color:#8b7564;cursor:pointer;}
 .noteworthy-button svg{flex:none;}
 .noteworthy-button[aria-pressed="true"]{background:#fff0df;color:#b6522c;border-color:#edc5a4;}
