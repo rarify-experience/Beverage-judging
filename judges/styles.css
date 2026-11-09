@@ -712,3 +712,4 @@ button:focus-visible {
 .reset-link:hover {
   opacity: 1;
 }
+.noteworthy-control{padding:12px 24px 0}.noteworthy-control button{min-height:44px;padding:10px 16px;border:1px solid #bd4c28;border-radius:8px;background:white;color:#92391e;font:inherit;cursor:pointer}.noteworthy-control button[aria-pressed="true"]{background:#fff0d4;color:#713200}.noteworthy-control button:disabled{opacity:.6;cursor:wait}.noteworthy-control p{font-size:12px;color:#666;margin:8px 0}
