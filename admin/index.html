@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rarify Judging Admin Prototype</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" /><link rel="stylesheet" href="/shared/styles.css">
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <a class="icon-btn" href="/" aria-label="Sections">‹</a>
+      
+    <div class="brand">
+    <img src="images/rarify-logo.jpg" alt="Rarify">
+    </div>
+
+      <button class="avatar" id="people" aria-label="Event people">＋</button>
+    </header>
+
+    <main>
+      <section class="event-strip">
+        <div><div class="eyebrow">EVENT</div><h1>CIWF 2027</h1></div>
+        <span class="status-pill">Shared database</span>
+      </section>
+
+      <p class="connection" id="connection-status">Connecting…</p><div class="action-row"><button class="secondary-btn" id="add-member">People</button><button class="text-btn" id="refresh-data">Refresh</button><a class="text-btn" href="/moderator/">Moderator →</a></div><nav class="segmented" aria-label="Primary sections">
+        <button class="segment active" data-view="panels">Panels</button>
+        <button class="segment" data-view="flights">Flights</button>
+        <button class="segment" data-view="wines">Wines</button>
+        <button class="segment" data-view="judges">Judges</button>
+      </nav>
+
+      <section id="panels-view" class="view active-view">
+        <div class="section-heading"><div><h2>Panels</h2><p>Build lettered groups of judges.</p></div><button class="primary-btn" id="add-panel-btn">+ Add Panel</button></div>
+        <div id="panel-list" class="stack-list"></div>
+      </section>
+
+      <section id="flights-view" class="view">
+        <div class="section-heading"><div><h2>Flights</h2><p>Build flights, assign panels and track release status.</p></div><button class="primary-btn" id="add-flight-btn">+ Add Flight</button></div>
+        <div class="flight-status-filters" role="group" aria-label="Flight status"><button type="button" data-flight-status="all" aria-pressed="true">All <span>0</span></button><button type="button" data-flight-status="upcoming" aria-pressed="false">Upcoming <span>0</span></button><button type="button" data-flight-status="released" aria-pressed="false">Released <span>0</span></button></div>
+        <div id="flight-list" class="stack-list"></div>
+      </section>
+
+      <section id="wines-view" class="view">
+        <div class="section-heading wine-heading"><div><h2>Wine Library</h2><p>The imported event list is the source of truth.</p></div><button class="primary-btn" id="import-wines-btn">Import / Update</button></div>
+        <div class="library-tools">
+          <input id="library-search" class="search-input" placeholder="Search producer, wine, distributor…">
+          <div class="filter-grid compact">
+            <select id="library-varietal"><option value="">All varietals</option></select>
+            <select id="library-region"><option value="">All regions</option></select>
+            <select id="library-world"><option value="">All classifications</option></select>
+          </div>
+          <div class="count-bar"><span id="library-count"></span><button class="text-btn" id="add-wine-btn">+ Add wine manually</button></div>
+        </div>
+        <div id="wine-library-list" class="stack-list"></div>
+      </section>
+
+      <section id="judges-view" class="view">
+        <div class="section-heading wine-heading"><div><h2>Judge Library</h2><p>Import and manage your event roster.</p></div><button class="primary-btn" id="import-judges-btn">Import / Update</button></div>
+        <input id="judge-search" class="search-input" placeholder="Search name, email, location or organization…" aria-label="Search judges">
+        <div class="action-row"><select id="judge-status" aria-label="Filter by login status"><option value="">All judges</option><option value="linked">Login linked</option><option value="pending">Login needed</option></select><button class="secondary-btn" id="link-judges">Link existing logins</button></div>
+        <div class="count-bar"><span id="judge-count"></span><button class="text-btn" id="add-judge-btn">+ Add judge manually</button></div><div id="judge-library-list" class="stack-list"></div>
+      </section>
+    </main>
+
+    <nav class="bottom-nav">
+      <button class="bottom-tab active" data-view="panels">◫<span>Panels</span></button>
+      <button class="bottom-tab" data-view="flights">▣<span>Flights</span></button>
+      <button class="bottom-tab" data-view="wines">◉<span>Wines</span></button>
+      <button class="bottom-tab" data-view="judges">♙<span>Judges</span></button>
+    </nav>
+  </div>
+
+  <dialog id="editor" class="modal"><div id="modal-root"></div></dialog>
+
+  <template id="panel-card-template"><article class="entity-card"><button class="entity-main"><span class="circle-id panel-id"></span><span class="entity-copy"><strong class="entity-title"></strong><span class="entity-subtitle"></span><span class="entity-meta"></span></span><span class="chevron">›</span></button></article></template>
+  <template id="flight-card-template"><article class="entity-card"><button class="entity-main"><span class="circle-id flight-id"></span><span class="entity-copy"><strong class="entity-title"></strong><span class="entity-subtitle"></span><span class="entity-meta"></span></span><span class="chevron">›</span></button></article></template>
+
+  <script src="/shared/xlsx.full.min.js"></script><script src="/shared/supabase.js"></script><script src="/shared/config.js"></script><script type="module" src="app.js"></script>
+</body>
+</html>

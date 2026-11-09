@@ -1,0 +1,6 @@
+Entry ID,Producer,Wine Name,Vintage,Varietals,Country,Region,Subregion,Label 1,Label 2,Price
+DEMO-001,Caymus Vineyards,Cabernet Sauvignon,2021,Cabernet Sauvignon,USA,California,Napa Valley,New World,Red,95
+DEMO-002,Far Niente,Estate Cabernet Sauvignon,2021,Cabernet Sauvignon,USA,California,Napa Valley,New World,Red,125
+DEMO-003,Silver Oak,Alexander Valley Cabernet Sauvignon,2020,Cabernet Sauvignon,USA,California,Alexander Valley,New World,Red,110
+DEMO-004,Flowers Vineyard,Sonoma Coast Pinot Noir,2022,Pinot Noir,USA,California,Sonoma Coast,New World,Red,72
+DEMO-005,Dutton-Goldfield,Emerald Ridge Pinot Noir,2021,Pinot Noir,USA,California,Green Valley,New World,Red,68

@@ -1,0 +1,2 @@
+export function flightStatus(flightId,assignments){const panels=assignments.filter(p=>p.flight_id===flightId);if(!panels.some(p=>p.released_at))return 'upcoming';return panels.every(p=>p.released_at)?'released':'partial';}
+export function filterFlights(flights,assignments,status='all'){return flights.filter(f=>{const actual=flightStatus(f.id,assignments);return status==='all'||(status==='released'?actual!=='upcoming':actual==='upcoming');}).slice().sort((a,b)=>a.number-b.number);}
