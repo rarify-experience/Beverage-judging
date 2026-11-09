@@ -67,7 +67,8 @@
       </section>
       <section id="roles-view" class="view">
         <div class="section-heading"><div><h2>Roles</h2><p>Manage who can administer, moderate or judge this event.</p></div><button class="primary-btn" id="manage-roles">Approve access</button></div>
-        <div id="roles-list" class="stack-list"></div>
+        <div class="role-group-tabs" role="group" aria-label="Role group"><button type="button" data-role-group="administrators" aria-pressed="true">Administrators</button><button type="button" data-role-group="judges" aria-pressed="false">Judges</button></div>
+        <p id="roles-description" class="connection"></p><div id="roles-list" class="stack-list"></div>
       </section>
     </main>
 
