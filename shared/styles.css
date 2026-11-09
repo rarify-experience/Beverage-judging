@@ -5,3 +5,11 @@
 #test-password-fields{display:grid;gap:18px}#test-password-fields input{margin-bottom:0}
 
 .portal .login-options{display:flex;gap:4px;max-width:420px;padding:4px;border:1px solid #e1ddd4;border-radius:10px;background:#eeece5;margin:24px 0}.portal .login-options button{flex:1;border:0;background:transparent;color:#6b6458;padding:12px;font-size:14px;font-weight:600}.portal .login-options button[aria-pressed="true"]{background:white;color:#b65329;box-shadow:0 1px 5px #0001}
+
+/* Dashboard switching is distinct from local section navigation. */
+nav.workspace-nav{display:flex;gap:4px;align-items:center;width:fit-content;max-width:100%;margin:16px 0 20px;padding:4px;border:1px solid #dedbd3;border-radius:10px;background:#eeece6;}
+nav.workspace-nav a{display:block;padding:10px 20px;min-height:40px;box-sizing:border-box;border-radius:7px;color:#615a51;text-decoration:none;font:600 13px/20px Inter,Arial,sans-serif;text-align:center;}
+nav.workspace-nav a[aria-current="page"]{background:#fff;color:#b65329;box-shadow:0 1px 4px #0001;}
+#email-delivery-notice{max-width:440px;width:calc(100% - 40px);box-sizing:border-box;border:1px solid #dedbd3;border-radius:14px;padding:24px;background:#fff;color:#302c27;font:14px/1.6 Inter,Arial,sans-serif;}
+#email-delivery-notice h2{font-size:20px;margin:0 0 16px;}#email-delivery-notice p{color:#686157;font-size:14px;}
+#email-delivery-notice button{border:1px solid #dedbd3;border-radius:8px;padding:10px 20px;background:white;color:#302c27;font:inherit;cursor:pointer;}

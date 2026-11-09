@@ -18,7 +18,7 @@
     <img src="images/rarify-logo.jpg" alt="Rarify">
     </div>
 
-      <button class="avatar" id="people" aria-label="Event people">＋</button>
+      <span class="admin-header-label">ADMIN</span>
     </header>
 
     <main>
@@ -27,11 +27,11 @@
         <span class="status-pill">Shared database</span>
       </section>
 
-      <p class="connection" id="connection-status">Connecting…</p><div class="action-row"><button class="secondary-btn" id="add-member">People</button><button class="text-btn" id="refresh-data">Refresh</button><a class="text-btn" href="/moderator/">Moderator →</a></div><nav class="segmented" aria-label="Primary sections">
+      <nav id="workspace-nav" class="workspace-nav" aria-label="Dashboards" hidden></nav><div class="admin-connection"><p class="connection" id="connection-status">Connecting…</p><button class="text-btn" id="refresh-data">Refresh</button></div><nav class="segmented" aria-label="Primary sections">
         <button class="segment active" data-view="panels">Panels</button>
         <button class="segment" data-view="flights">Flights</button>
         <button class="segment" data-view="wines">Wines</button>
-        <button class="segment" data-view="judges">Judges</button>
+        <button class="segment" data-view="judges">Judges</button><button class="segment" data-view="roles">Roles</button>
       </nav>
 
       <section id="panels-view" class="view active-view">
@@ -63,7 +63,11 @@
         <div class="section-heading wine-heading"><div><h2>Judge Library</h2><p>Import and manage your event roster.</p></div><button class="primary-btn" id="import-judges-btn">Import / Update</button></div>
         <input id="judge-search" class="search-input" placeholder="Search name, email, location or organization…" aria-label="Search judges">
         <div class="action-row"><select id="judge-status" aria-label="Filter by login status"><option value="">All judges</option><option value="linked">Login linked</option><option value="pending">Login needed</option></select><button class="secondary-btn" id="link-judges">Link existing logins</button></div>
-        <div class="count-bar"><span id="judge-count"></span><button class="text-btn" id="add-judge-btn">+ Add judge manually</button></div><div id="judge-library-list" class="stack-list"></div>
+        <div class="action-row"><button class="secondary-btn" id="email-all-judges" type="button">Send setup emails to all judges</button></div><div class="count-bar"><span id="judge-count"></span><button class="text-btn" id="add-judge-btn">+ Add judge manually</button></div><div id="judge-library-list" class="stack-list"></div>
+      </section>
+      <section id="roles-view" class="view">
+        <div class="section-heading"><div><h2>Roles</h2><p>Manage who can administer, moderate or judge this event.</p></div><button class="primary-btn" id="manage-roles">Approve access</button></div>
+        <div id="roles-list" class="stack-list"></div>
       </section>
     </main>
 
@@ -71,7 +75,7 @@
       <button class="bottom-tab active" data-view="panels">◫<span>Panels</span></button>
       <button class="bottom-tab" data-view="flights">▣<span>Flights</span></button>
       <button class="bottom-tab" data-view="wines">◉<span>Wines</span></button>
-      <button class="bottom-tab" data-view="judges">♙<span>Judges</span></button>
+      <button class="bottom-tab" data-view="judges">♙<span>Judges</span></button><button class="bottom-tab" data-view="roles">⚙<span>Roles</span></button>
     </nav>
   </div>
 

@@ -2,13 +2,13 @@
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Rarify · Moderator</title><link rel="stylesheet" href="styles.css"><link rel="stylesheet" href="/shared/styles.css"></head><body>
 <header><a class="brand" href="./">rarify<span>®</span></a><span class="role">MODERATOR</span><span class="avatar">CC</span></header>
 <main><div class="event"><div><p class="eyebrow">CINCINNATI INTERNATIONAL WINE FESTIVAL</p><h1>Judging dashboard</h1><p>CIWF 2027 <span class="separator">/</span> Session 1 · Morning</p></div><span class="pill">Shared database</span></div>
-<p class="connection" id="connection-status">Connecting…</p><div id="summary" class="summary"></div>
+<nav id="workspace-nav" class="workspace-nav" aria-label="Dashboards" hidden></nav><p class="connection" id="connection-status">Connecting…</p><div id="summary" class="summary"></div>
 <nav aria-label="Dashboard views"><button id="flights-tab" aria-selected="true">Flights <span id="flight-count">0</span></button><button id="results-tab" aria-selected="false">Submitted results</button><button id="recaps-tab" aria-selected="false">Judge recaps</button></nav>
 <section id="flights-view"><div class="section-title"><div><h2>Flight control</h2><p>Release prepared flights to their assigned panels.</p></div></div><div id="flight-list"></div>
 </section>
 <section id="results-view" hidden><div class="section-title"><div><h2>Submitted results</h2><p>Only submitted wine scorecards contribute to these totals.</p></div><span class="pill"><i></i> Submitted scores</span></div><div class="filters"><label>Flight<select id="flight-filter"><option value="">All flights</option></select></label><label>Wine<input id="wine-filter" type="search" placeholder="Search wine, producer or entry…"></label></div><div class="results-meta"><span id="result-count"></span><span id="ranking-scope">Rank across all flights</span><span>Highest average first · / 20</span></div><div id="result-list"></div></section>
 <section id="recaps-view" hidden>
-<div class="section-title"><div><h2>Judge recaps</h2><p>Review each judge’s email with their submitted scores and noteworthy wines.</p></div><button id="recap-reload" class="secondary">Refresh recaps</button></div>
+<div class="section-title"><div><h2>Judge recaps</h2><p>Review each judge’s email with their submitted scores and noteworthy wines.</p></div><div class="recap-bulk-actions"><button id="recap-send-all" class="primary" type="button" disabled>Send emails to all judges</button><button id="recap-reload" class="secondary">Refresh recaps</button></div></div>
 <div class="filters"><label>Find a judge<input id="recap-search" type="search" placeholder="Search name or email…"></label></div>
 <p id="recap-load-status" role="status"></p><p id="recap-count"></p><div id="recap-list"></div>
 </section>

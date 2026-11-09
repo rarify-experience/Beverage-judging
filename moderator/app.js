@@ -1,3 +1,4 @@
+import {mountWorkspaceNav} from '/shared/workspace-nav.js';
 import {setupRecapView} from './judge-recaps.js';
 import {rankWineResults} from './rank-results.js';
 import {db,eventId,$,esc,rpc,rows,requireUser,toolbar,attributes,guard,message,watch,busy} from '/shared/app.js';
@@ -14,4 +15,4 @@ const recapView=setupRecapView({rpc,message});
 function show(view){$('#recaps-view').hidden=view!=='recaps';$('#recaps-tab').setAttribute('aria-selected',String(view==='recaps'));if(view==='recaps')recapView.load();$('#flights-view').hidden=view!=='flights';$('#results-view').hidden=view!=='results';$('#flights-tab').setAttribute('aria-selected',String(view==='flights'));$('#results-tab').setAttribute('aria-selected',String(view==='results'));renderResults();}
 $('#recaps-tab').onclick=()=>show('recaps');
 $('#flights-tab').onclick=()=>show('flights');$('#results-tab').onclick=()=>show('results');$('#flight-filter').onchange=renderResults;$('#wine-filter').oninput=renderResults;$('#refresh').onclick=guard(refresh);
-guard(async()=>{toolbar(await requireUser(['admin','moderator']));await refresh();watch(['flight_panels','score_submissions'],refresh);})();
+guard(async()=>{const account=await requireUser(['admin','moderator']);toolbar(account);mountWorkspaceNav(account,'moderator');await refresh();watch(['flight_panels','score_submissions'],refresh);})();

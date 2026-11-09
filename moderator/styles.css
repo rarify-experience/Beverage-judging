@@ -14,3 +14,5 @@
 #recap-email{padding:0 16px 16px;overflow-wrap:anywhere;}#recap-email h1{letter-spacing:normal;}#recap-email p{color:inherit;font-size:14px;}
 .recap-preview-actions{justify-content:flex-end;border-top:1px solid var(--line);}
 @media(max-width:650px){nav{gap:18px;flex-wrap:wrap;}.recap-row{align-items:flex-start;flex-direction:column;}.recap-preview-toolbar,.recap-preview-actions{padding:16px;flex-wrap:wrap;}#recap-email{padding:0 4px 12px;}#recap-email>div{padding:18px!important;}#recap-email table{font-size:12px!important;}}
+
+.recap-bulk-actions{display:flex;gap:10px;flex-wrap:wrap;justify-content:flex-end;}@media(max-width:650px){.recap-bulk-actions{justify-content:flex-start;}#recaps-view .section-title{flex-direction:column;}}

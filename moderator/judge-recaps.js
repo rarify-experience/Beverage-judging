@@ -1,3 +1,4 @@
+import {showEmailDeliveryNotice} from '/shared/workspace-nav.js';
 const escapeHtml=(value='')=>String(value??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const key=row=>row.flight_id+':'+row.wine_id;
 
@@ -71,12 +72,14 @@ export function setupRecapView({rpc,message}){
     const token=++request;
     $('#recap-load-status').textContent='Loading judge recaps…';
     $('#recap-reload').disabled=true;
+    $('#recap-send-all').disabled=true;
     $('#recap-list').innerHTML='';
     $('#recap-count').textContent='';
     try{
       const fresh=await rpc('judge_recap_data');
       if(token!==request)return;
       snapshot=fresh;recaps=assembleRecaps(snapshot);renderList();
+      $('#recap-send-all').disabled=false;
       $('#recap-load-status').textContent='Snapshot updated '+new Date(snapshot.generatedAt).toLocaleString();
       if(dialog.open)open(selectedId);
     }catch(error){
@@ -84,6 +87,7 @@ export function setupRecapView({rpc,message}){
       $('#recap-load-status').textContent=error.code==='PGRST202'?'Judge recaps need the database update installed first.':'Unable to load judge recaps. '+error.message;
     }finally{if(token===request)$('#recap-reload').disabled=false;}
   }
+  $('#recap-send-all').onclick=()=>showEmailDeliveryNotice({kind:'recap',count:recaps.filter(r=>r.email&&r.items.length).length});
   $('#recap-search').oninput=renderList;
   $('#recap-reload').onclick=load;
   $('#recap-close').onclick=()=>dialog.close();
