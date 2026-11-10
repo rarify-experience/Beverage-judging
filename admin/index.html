@@ -28,10 +28,11 @@
       </section>
 
       <nav id="workspace-nav" class="workspace-nav" aria-label="Dashboards" hidden></nav><div class="admin-connection"><p class="connection" id="connection-status">Connecting…</p><button class="text-btn" id="refresh-data">Refresh</button></div><nav class="segmented" aria-label="Primary sections">
+        <button class="segment" data-view="wines">Wines</button>
+        <button class="segment" data-view="judges">Judges</button>
         <button class="segment active" data-view="panels">Panels</button>
         <button class="segment" data-view="flights">Flights</button>
-        <button class="segment" data-view="wines">Wines</button>
-        <button class="segment" data-view="judges">Judges</button><button class="segment" data-view="roles">Roles</button>
+        <button class="segment" data-view="roles">Roles</button>
       </nav>
 
       <section id="panels-view" class="view active-view">
@@ -73,11 +74,12 @@
     </main>
 
     <nav class="bottom-nav">
-      <button class="bottom-tab active" data-view="panels">◫<span>Panels</span></button>
-      <button class="bottom-tab" data-view="flights">▣<span>Flights</span></button>
-      <button class="bottom-tab" data-view="wines">◉<span>Wines</span></button>
-      <button class="bottom-tab" data-view="judges">♙<span>Judges</span></button><button class="bottom-tab" data-view="roles">⚙<span>Roles</span></button>
-    </nav>
+        <button class="bottom-tab" data-view="wines">◉<span>Wines</span></button>
+        <button class="bottom-tab" data-view="judges">♙<span>Judges</span></button>
+        <button class="bottom-tab active" data-view="panels">◫<span>Panels</span></button>
+        <button class="bottom-tab" data-view="flights">▣<span>Flights</span></button>
+        <button class="bottom-tab" data-view="roles">⚙<span>Roles</span></button>
+      </nav>
   </div>
 
   <dialog id="editor" class="modal"><div id="modal-root"></div></dialog>
