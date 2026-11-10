@@ -13,7 +13,7 @@ function scoresFor(f,w){const key=draftKey(f,w);if(!drafts.has(key))drafts.set(k
 function screen(name){for(const element of document.querySelectorAll('.screen'))element.classList.toggle('active',element.id===name+'-screen');}
 async function refresh(){const [fs,ws,as,ps,ss,ds]=await Promise.all([rows('flights'),rows('flight_wines'),rows('flight_panels'),rows('panels'),rows('score_submissions',q=>q.eq('judge_id',account.user.id).order('flight_id').order('wine_id')),rows('score_drafts',q=>q.eq('judge_id',account.user.id).order('flight_id').order('wine_id'))]);await bookmarks.refresh();flights=fs.sort((a,b)=>a.number-b.number);flightWines=ws;assignments=as;panels=ps;submissions=ss;for(const d of ds){const key=draftKey(d.flight_id,d.wine_id);if(!drafts.has(key)||!drafts.get(key).dirty)drafts.set(key,{scores:Object.fromEntries(attributes.filter(([k])=>d[k]!==null).map(([k])=>[k,d[k]])),dirty:false});}for(const s of submissions)drafts.delete(draftKey(s.flight_id,s.wine_id));cache();renderWaiting();if(currentFlight)renderFlight();if(currentWine&&receipt(currentFlight,currentWine))renderWine();}
 function renderWaiting(){$('#judge-name').textContent=account.profile.display_name;$('#panel-name').textContent=panels.map(p=>'Panel '+p.letter).join(' · ')||'Awaiting panel assignment';const pending=flights.filter(f=>flightItems(f.id).some(w=>!receipt(f.id,w.wine_id)));$('#waiting-status').textContent=pending.length?'Your next flight is ready':'Awaiting your next flight';$('#waiting-flights').innerHTML=flights.map(f=>{const wines=flightItems(f.id),n=wines.filter(w=>receipt(f.id,w.wine_id)).length;return `<button class="flight-choice" data-flight="${f.id}"><strong>${esc(f.name)} ${n===wines.length?'✓':'→'}</strong><small>${wines.length} wines · ${n} submitted${n===wines.length?' · View receipts':''}</small></button>`;}).join('');document.querySelectorAll('[data-flight]').forEach(b=>b.onclick=()=>{currentFlight=b.dataset.flight;currentWine=null;renderFlight();screen('flight');});}
-function renderFlight(){const f=flights.find(f=>f.id===currentFlight);if(!f)return;$('#flight-title').textContent=f.name;$('#flight-description').textContent=f.description;const wines=flightItems(f.id),n=wines.filter(w=>receipt(f.id,w.wine_id)).length;$('#progress-fill').style.width=(wines.length?n/wines.length*100:0)+'%';$('#progress-copy').textContent=`${n} of ${wines.length} wines submitted`;$('#wine-list').innerHTML=wines.map(w=>{const s=receipt(f.id,w.wine_id),draft=scoresFor(f.id,w.wine_id);return `<button class="wine-tile" data-wine="${w.wine_id}"><span class="list-number">${w.position}</span><span class="wine-main"><strong>Wine ${esc(w.blind_code)}</strong><span>${bookmarks.has(f.id,w.wine_id)?'★ Noteworthy · ':''}${s?'Submission confirmed':complete(draft.scores)?'Draft complete · ready to submit':Object.keys(draft.scores).length?'Draft in progress':'Not scored'}</span></span><span class="wine-state"><span class="score">${s?s.total+'/20':'›'}</span></span></button>`;}).join('');document.querySelectorAll('[data-wine]').forEach(b=>b.onclick=()=>{currentWine=b.dataset.wine;const draft=scoresFor(currentFlight,currentWine);openCriterion=attributes.find(([id])=>draft.scores[id]===undefined)?.[0]||'sight';renderWine();screen('wine');});}
+function renderFlight(){const f=flights.find(f=>f.id===currentFlight);if(!f)return;$('#flight-title').textContent=f.name;$('#flight-description').textContent=f.description;const wines=flightItems(f.id),n=wines.filter(w=>receipt(f.id,w.wine_id)).length;$('#progress-fill').style.width=(wines.length?n/wines.length*100:0)+'%';$('#progress-copy').textContent=`${n} of ${wines.length} wines submitted`;$('#wine-list').innerHTML=wines.map(w=>{const s=receipt(f.id,w.wine_id),draft=scoresFor(f.id,w.wine_id);return `<button class="wine-tile" data-wine="${w.wine_id}"><span class="list-number">${w.position}</span><span class="wine-main"><strong>Wine ${esc(w.blind_code)}</strong><span>${bookmarks.has(f.id,w.wine_id)?'★ Noteworthy · ':''}${s?'Submission confirmed':complete(draft.scores)?'Draft complete · ready to submit':Object.keys(draft.scores).length?'Draft in progress':'Not scored'}</span></span><span class="wine-state"><span class="score">${s?s.total+'/20':'›'}</span></span></button>`;}).join('');document.querySelectorAll('[data-wine]').forEach(b=>b.onclick=()=>{currentWine=b.dataset.wine;const draft=scoresFor(currentFlight,currentWine);openCriterion=attributes.find(([id])=>draft.scores[id]===undefined)?.[0]||'sight';renderWine();screen('wine');scrollAttributeIntoView(false);});}
 function renderWine(){
   const wine=flightItems(currentFlight).find(w=>w.wine_id===currentWine);
   if(!wine)return;
@@ -22,6 +22,8 @@ function renderWine(){
   const flight=flights.find(f=>f.id===currentFlight);
   const panelIds=new Set(assignments.filter(a=>a.flight_id===currentFlight).map(a=>a.panel_id));
   const panelLabels=panels.filter(p=>panelIds.has(p.id)).map(p=>'Panel '+p.letter);
+  $('#wine-focus-name').textContent='Wine '+wine.blind_code;
+  $('#wine-focus-description').textContent=flight.description||flight.name;
   $('#wine-context').textContent=['Flight '+flight.number,...panelLabels].join(' · ');
   $('#wine-number').textContent=wine.position;
   $('#wine-name').textContent='Wine '+wine.blind_code;
@@ -36,8 +38,8 @@ function renderWine(){
   $('#criteria-list').innerHTML=criteria.map((c,i)=>`<section class="criterion ${c.id===openCriterion?'open':''}"><button type="button" class="criterion-summary" data-criterion="${c.id}" aria-expanded="${c.id===openCriterion}" aria-controls="criterion-body-${c.id}"><span><span class="title">${esc(c.title)}</span>${c.subtitle?`<span class="subtitle">${esc(c.subtitle)}</span>`:''}</span><span class="criterion-right"><span class="criterion-score">${scores[c.id]??'—'} / ${c.max}</span><span class="criterion-chevron" aria-hidden="true"></span></span></button><div id="criterion-body-${c.id}" class="criterion-body" ${c.id===openCriterion?'':'hidden'}><div class="score-buttons" style="--score-count:${c.max+1}">${Array.from({length:c.max+1},(_,v)=>`<button type="button" class="score-btn ${scores[c.id]===v?'selected':''}" data-score="${v}" data-attribute="${c.id}" aria-pressed="${scores[c.id]===v}" aria-label="${esc(c.title)} score ${v}" ${submitted||submitting?'disabled':''}>${v}</button>`).join('')}</div><div class="guide"><strong>Scoring guide</strong>${c.guide.map(line=>`<div>${esc(line)}</div>`).join('')}</div><button class="complete-criterion" data-next="${c.id}" ${scores[c.id]===undefined?'disabled':''}>${submitted?'View next attribute':i===criteria.length-1?'Review wine':'Complete attribute'}</button></div></section>`).join('');
   $('#submit-wine').disabled=!!submitted||!complete(draft.scores)||submitting;
   $('#submit-wine').textContent=submitted?'Wine submitted':submitting?'Submitting…':'Submit wine';
-  document.querySelectorAll('[data-criterion]').forEach(b=>b.onclick=()=>{openCriterion=openCriterion===b.dataset.criterion?null:b.dataset.criterion;renderWine();});
-  document.querySelectorAll('[data-next]').forEach(b=>b.onclick=()=>{const i=criteria.findIndex(c=>c.id===b.dataset.next);openCriterion=criteria[i+1]?.id||null;renderWine();});
+  document.querySelectorAll('[data-criterion]').forEach(b=>b.onclick=()=>{openCriterion=openCriterion===b.dataset.criterion?null:b.dataset.criterion;renderWine();if(openCriterion)scrollAttributeIntoView();});
+  document.querySelectorAll('[data-next]').forEach(b=>b.onclick=()=>{const i=criteria.findIndex(c=>c.id===b.dataset.next);openCriterion=criteria[i+1]?.id||null;renderWine();scrollAttributeIntoView();});
   document.querySelectorAll('[data-score]').forEach(b=>b.onclick=()=>{draft.scores[b.dataset.attribute]=Number(b.dataset.score);draft.dirty=true;cache();renderWine();persistDraft(currentFlight,currentWine);});
 }
 
@@ -65,3 +67,20 @@ $('#noteworthy').onclick=async()=>{
   catch(error){message('Bookmark could not be saved. Please retry. '+error.message,true);}
   finally{if(currentFlight&&currentWine)renderBookmark();}
 };
+
+// Scroll only the wine's content area, leaving the account bar and footer alone.
+// Run after layout so the expanded card and sticky wine description are measured.
+let attributeScrollFrame;
+function scrollAttributeIntoView(animate=true){
+  cancelAnimationFrame(attributeScrollFrame);
+  attributeScrollFrame=requestAnimationFrame(()=>{
+    const scroller=$('#wine-screen');
+    if(!scroller.classList.contains('active'))return;
+    const target=openCriterion?scroller.querySelector('.criterion.open'):scroller.querySelector('.wine-total');
+    if(!target)return;
+    const context=$('#wine-focus-context');
+    const top=scroller.scrollTop+target.getBoundingClientRect().top-scroller.getBoundingClientRect().top-context.offsetHeight-12;
+    const reduced=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    scroller.scrollTo({top:Math.max(0,top),behavior:animate&&!reduced?'smooth':'instant'});
+  });
+}

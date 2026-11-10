@@ -756,3 +756,11 @@ button:focus-visible {
 .wine-total{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:0 24px 18px;color:#79736b;font-size:13px;}.wine-total strong{color:#25231f;font-size:24px;font-weight:600;font-variant-numeric:tabular-nums;}.wine-total small{font-size:13px;font-weight:400;color:#79736b;}
 #wine-screen .sticky-actions{padding:18px;border-top:1px solid #e6e2dc;background:white;gap:10px;}#wine-screen .sticky-actions button{min-height:44px;border-radius:10px;font-size:12px;font-weight:600;}#wine-screen .sticky-actions .primary{background:#f4540c;border-color:#f4540c;color:white;}#wine-screen .sticky-actions .secondary{background:transparent;border-color:#e6e2dc;color:#302c27;}
 @media(max-width:600px){.phone{border:0;border-radius:0;}}
+
+/* Keep wine context visible while the selected scoring card moves into view. */
+#wine-screen{overflow-anchor:none;scroll-padding-bottom:100px;}
+.wine-focus-context{position:sticky;top:0;z-index:8;display:grid;gap:4px;padding:10px 24px;background:#fffcf8;border-bottom:1px solid #e6e2dc;margin:0 0 12px;}
+.wine-focus-context strong{font-size:14px;line-height:1.3;color:#25231f;text-align:center;}
+.wine-focus-context span{font-size:11px;line-height:1.4;color:#79736b;text-align:center;white-space:pre-line;overflow-wrap:anywhere;}
+.wine-focus-context span:empty{display:none;}
+@media(max-width:600px){#wine-screen .sticky-actions{padding-bottom:max(18px,env(safe-area-inset-bottom));}#wine-screen{padding-bottom:calc(110px + env(safe-area-inset-bottom));}}
